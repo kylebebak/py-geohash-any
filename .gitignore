@@ -1,0 +1,3 @@
+# Ignore save files
+__pycache__/
+*.pyc
