@@ -46,4 +46,4 @@ python -m gh_any.tests.test_urlsafe -v
 ## LICENSE
 This code is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
 
-The author of urlsafe is: <http://stackoverflow.com/users/64474/miles>. The code was posted on Stack Overflow, and is thus licensed under a Creative Commons Attribution-ShareAlike License.
+The author of `urlsafe.py` is: <http://stackoverflow.com/users/64474/miles>. The code was posted on Stack Overflow, and is thus licensed under a Creative Commons Attribution-ShareAlike License.
