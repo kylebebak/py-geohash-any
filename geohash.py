@@ -1,21 +1,24 @@
 """
 Look at README for implementation details. For changing the encoding used
-for url-safe geohashes, edit to_urlsafe(), to_binary() and BITS.
+for url-safe geohashes, edit in ALPHABET.
 """
 
-from . import base64url as url
+from math import log
+from . import urlsafe as url
 
-
-BITS = 6
+BITS = log(len(url.ALPHABET)) / log(2)
+if not BITS.is_integer():
+    raise Exception('Alphabet length is not a power of two.')
+BITS = int(BITS)
 
 def to_urlsafe(geohash):
     """Converts binary geohash to compressed url-safe geohash."""
-    return url.to_b64(
+    return url.to_urlsafe(
         int(geohash, 2)).rjust(len(geohash)//BITS, url.ALPHABET[0])
 
 def to_binary(geohash):
     """Converts url-safe geohash to binary geohash."""
-    return bin(url.from_b64(geohash))[2:].zfill(BITS*len(geohash))
+    return bin(url.from_urlsafe(geohash))[2:].zfill(BITS*len(geohash))
 
 
 def _truncate_decimal(num, precision):
@@ -75,7 +78,7 @@ def _decode(geohash, max_coord):
 
 
 def _nbr_prev(geohash):
-    """Helper function for computing N/W neighbors."""
+    """Helper function for computing S/W neighbors."""
     GH = list(geohash)
     for i in range(len(GH)-1, -1, -1):
         if GH[i] == '0':
@@ -86,7 +89,7 @@ def _nbr_prev(geohash):
     return GH
 
 def _nbr_next(geohash):
-    """Helper function for computing S/E neighbors."""
+    """Helper function for computing N/E neighbors."""
     GH = list(geohash)
     for i in range(len(GH)-1, -1, -1):
         if GH[i] == '1':
@@ -101,7 +104,7 @@ def neighbors_bin(geohash, chars=None):
     neighbors of the box defined by the binary geohash argument."""
     lon, lat = _split(geohash, chars)
 
-    W, N, E, S = _nbr_prev(lon), _nbr_prev(lat), _nbr_next(lon), _nbr_next(lat)
+    W, S, E, N = _nbr_prev(lon), _nbr_prev(lat), _nbr_next(lon), _nbr_next(lat)
     return {
             'w': _interleave(W, lat), 'nw': _interleave(W, N),
             'n': _interleave(lon, N), 'ne': _interleave(E, N),

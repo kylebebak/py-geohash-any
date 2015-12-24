@@ -27,21 +27,22 @@ class TestGeohash(unittest.TestCase):
 
     def test_neighbors(self):
         nbrs = gh.neighbors_bin(gh.encode_bin(83.345326, -114.876748, 17))
-        self.assertEqual( nbrs['ne'], '01011101101110011' )
-        self.assertEqual( nbrs['sw'], '01011101101101111' )
+        self.assertEqual( nbrs['ne'], '01011101101111011' )
+        self.assertEqual( nbrs['sw'], '01011101101100111' )
         nbrs = gh.neighbors_bin(gh.encode_bin(83.345326, -114.876748, 17), 12)
-        self.assertEqual( nbrs['ne'], '010111110000' )
-        self.assertEqual( nbrs['sw'], '010111011100' )
+        self.assertEqual( nbrs['ne'], '010111110100' )
+        self.assertEqual( nbrs['sw'], '010111011000' )
 
     def test_neighbor_decode(self):
         geohash = 'Xbxg6yNP'
         coords = gh.decode(geohash)
-        se = gh.neighbors(geohash)['se']
+        ne = gh.neighbors(geohash)['ne']
         self.assertEqual(
             gh.encode(
-            coords['lat'] + coords['h'], coords['lon'] + coords['w'], len(geohash)
+                coords['lat'] + coords['h'], coords['lon'] + coords['w'],
+                len(geohash)
             ),
-            se
+            ne
         )
 
 

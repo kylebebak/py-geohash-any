@@ -6,5 +6,5 @@ setup(
 	description='Python geohash library designed to use any encoding',
 	author='Kyle Bebak',
 	url='http://www.dronfelipe.com/geohash',
-	py_modules=['geohash','base64url'],
+	py_modules=['geohash','urlsafe'],
 )
