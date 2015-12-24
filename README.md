@@ -1,8 +1,8 @@
 # py-geohash-any
 **py-geohash-any** is a Python geohash library designed to be used with any encoding, focused on simplicity and clarity.
 
-## Implementation details
-The core functions of the library work with binary geohashes. The functions for hashing, dehashing and finding neighbors wrap the core functions with with calls to `to_urlsafe()` and `to_binary()`, which in turn depend on functions in `urlsafe.py`. If you want to use a different encoding, simply change the `ALPHABET` variable in `urlsafe.py`.
+## Implementation
+The core functions of the library work with binary geohashes. The functions for hashing, dehashing and finding neighbors wrap the core functions with calls to `to_urlsafe()` and `to_binary()`, which in turn depend on functions in `urlsafe.py`. If you want to use a different encoding, simply change the `ALPHABET` variable in `urlsafe.py`.
 
 Base 32 (5-bit) encoding is often used to create a compressed url-safe string from a binary geohash. In base 32, each character encodes 5 **longitude/latitude halvings** of the (longitude, latitude) space. If you want to use base 32, uncomment the standard geohash base 32 alphabet, which is included in `urlsafe.py`.
 
@@ -10,6 +10,12 @@ By default, this library uses base 64 (6-bit) encoding, specifically [base64url]
 
 Using base 64, an 8 character geohash provides a lat/lon bounding box that measures **.00001 by .00002 degrees**. At the equator, where this box is largest, this is roughly equivalent to **1 by 2 meters**.
 
+In addition to the examples below, here's a [toy client](http://www.dronfelipe.com/geohash) that uses the API to display geohash bounding boxes and their neighbors.
+
+## Installation
+```sh
+pip install py-geohash-any
+```
 
 ## Examples
 ```py
@@ -25,21 +31,23 @@ gh.decode('Xbxg6yNP')
 
 # finding neighbors
 gh.neighbors(gh.encode(83.345326, -114.876748, 8))
-# {'e': 'Xbxg6yNl', 'n': 'Xbxg6yNO', 'ne': 'Xbxg6yNk', 'nw': 'Xbxg6yNM', 's': 'Xbxg6yNa', 'se': 'Xbxg6yNw', 'sw': 'Xbxg6yNY', 'w': 'Xbxg6yNN'}
+# {'e': 'Xbxg6yNl', 'n': 'Xbxg6yNO', 'ne': 'Xbxg6yNk', 'nw': 'Xbxg6yNM',
+# 's': 'Xbxg6yNa', 'se': 'Xbxg6yNw', 'sw': 'Xbxg6yNY', 'w': 'Xbxg6yNN'}
 
-# finding neighbors with larger bounding boxes, e.g. to increase the range of a proximity search
+# finding neighbors with larger bounding boxes,
+# e.g. to increase the range of a proximity search
 gh.neighbors(gh.encode(83.345326, -114.876748, 8), 4)
-# {'e': 'Xbxi', 'n': 'Xbw1', 'ne': 'Xbw3', 'nw': 'Xbwf', 's': 'Xbxh', 'se': 'Xbxj', 'sw': 'XbxL', 'w': 'XbxK'}
+# {'e': 'Xbxi', 'n': 'Xbw1', 'ne': 'Xbw3', 'nw': 'Xbwf', 
+# 's': 'Xbxh', 'se': 'Xbxj', 'sw': 'XbxL', 'w': 'XbxK'}
 ```
 
 ## Tests
 ```sh
 # run all unit tests
-python -m unittest discover tests -v
+python -m unittest discover py_geohash_any.tests -v
 
 # run unit tests in a single module
-python -m tests.test_geohash -v
-python -m tests.test_urlsafe -v
+python -m py_geohash_any.tests.<module> -v
 ```
 
 
