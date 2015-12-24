@@ -1,8 +1,26 @@
 import unittest
-from custom.graph_edge import Edge, EdgeWeightedGraph
-from custom.mst import KruskalMST
+from .. import geohash as gh
 
-class TestGraphMST(unittest.TestCase):
+"""
+from custom import geohash as gh
+
+gh.encode_b64(90, 180, 8)
+gh.encode_b64(-90, -180, 8)
+gh.encode_b64(-89.9, -179.9, 8)
+gh.encode_b64(0, 0, 8)
+gh.encode(-90, -180, 24)
+
+gh.encode(83.34533, -114.87675, 24)
+gh.encode_b64(83.34533, -114.87675, 8)
+
+gh.neighbors(gh.encode(83.34533, -114.87675, 24))
+gh.neighbors(gh.encode(83.34533, -114.87675, 24), precision=12)
+gh.neighbors_b64(gh.encode_b64(83.34533, -114.87675, 8))
+gh.neighbors_b64(gh.encode_b64(83.34533, -114.87675, 8), precision=4)
+"""
+
+
+class TestGeohash(unittest.TestCase):
     """This unit test includes tests for the Edge data type,
     EdgeWeightedGraph, and KruskalMST."""
     def setUp(self):
