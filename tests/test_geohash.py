@@ -1,5 +1,5 @@
 import unittest
-from .. import geohash as gh
+from ..py_geohash_any import geohash as gh
 
 class TestGeohash(unittest.TestCase):
 
