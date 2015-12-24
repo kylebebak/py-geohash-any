@@ -35,11 +35,11 @@ gh.neighbors(gh.encode(83.345326, -114.876748, 8), 4)
 ## Tests
 ```sh
 # run all unit tests
-python -m unittest discover gh_any.tests -v
+python -m unittest discover tests -v
 
 # run unit tests in a single module
-python -m gh_any.tests.test_geohash -v
-python -m gh_any.tests.test_urlsafe -v
+python -m tests.test_geohash -v
+python -m tests.test_urlsafe -v
 ```
 
 

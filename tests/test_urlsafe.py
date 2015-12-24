@@ -1,5 +1,5 @@
 import unittest
-from ..py_geohash_any import urlsafe as url
+from py_geohash_any import urlsafe as url
 
 class TestUrlSafe(unittest.TestCase):
 
