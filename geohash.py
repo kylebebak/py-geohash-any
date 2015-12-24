@@ -1,21 +1,21 @@
 """
 Look at README for implementation details. For changing the encoding used
-for url-safe geohashes, edit to_urlsafe(), to_binary() and ENCODING_BITS.
+for url-safe geohashes, edit to_urlsafe(), to_binary() and BITS.
 """
 
 from . import base64url as url
 
 
-ENCODING_BITS = 6
+BITS = 6
 
 def to_urlsafe(geohash):
     """Converts binary geohash to compressed url-safe geohash."""
     return url.to_b64(
-        int(geohash, 2)).rjust(len(geohash)//6, url.ALPHABET[0])
+        int(geohash, 2)).rjust(len(geohash)//BITS, url.ALPHABET[0])
 
 def to_binary(geohash):
     """Converts url-safe geohash to binary geohash."""
-    return bin(url.from_b64(geohash))[2:].zfill(6*len(geohash))
+    return bin(url.from_b64(geohash))[2:].zfill(BITS*len(geohash))
 
 
 def _truncate_decimal(num, precision):
@@ -112,7 +112,7 @@ def neighbors_bin(geohash, chars=None):
 
 def encode(lat, lon, chars):
     """Encodes longitude and latitude as a url-safe geohash."""
-    return to_urlsafe(encode_bin(lat, lon, chars*ENCODING_BITS))
+    return to_urlsafe(encode_bin(lat, lon, chars*BITS))
 
 def decode(geohash, binary_in=False):
     """Returns a dict with the lat/lon coords at the center of the bounding
@@ -136,7 +136,7 @@ def neighbors(geohash, chars=None):
     geohash = to_binary(geohash)
 
     nbrs = neighbors_bin(geohash) if chars is None \
-        else neighbors_bin(geohash, chars*ENCODING_BITS)
+        else neighbors_bin(geohash, chars*BITS)
     return {k: to_urlsafe(v) for k, v in nbrs.items()}
 
 

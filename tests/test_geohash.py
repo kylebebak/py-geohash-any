@@ -33,6 +33,17 @@ class TestGeohash(unittest.TestCase):
         self.assertEqual( nbrs['ne'], '010111110000' )
         self.assertEqual( nbrs['sw'], '010111011100' )
 
+    def test_neighbor_decode(self):
+        geohash = 'Xbxg6yNP'
+        coords = gh.decode(geohash)
+        se = gh.neighbors(geohash)['se']
+        self.assertEqual(
+            gh.encode(
+            coords['lat'] + coords['h'], coords['lon'] + coords['w'], len(geohash)
+            ),
+            se
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
