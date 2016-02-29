@@ -17,7 +17,7 @@ pip install py-geohash-any
 
 ## Examples
 ```py
-from gh_any import geohash as gh
+from py_geohash_any import geohash as gh
 
 # encoding
 gh.encode(83.345326, -114.876748, 8)
@@ -50,6 +50,4 @@ python -m py_geohash_any.tests.<module> -v
 
 
 ## LICENSE
-This code is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
-
-The author of `urlsafe.py` is: <http://stackoverflow.com/users/64474/miles>. The code was posted on Stack Overflow, and is thus licensed under a Creative Commons Attribution-ShareAlike License.
+This code is licensed under the [MIT License](https://opensource.org/licenses/MIT).
