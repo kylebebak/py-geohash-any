@@ -1,6 +1,6 @@
 """
 Look at README for implementation details. For changing the encoding used
-for url-safe geohashes, edit in ALPHABET.
+for url-safe geohashes, edit `urlsafe.ALPHABET`.
 """
 
 from math import log

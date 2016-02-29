@@ -10,8 +10,6 @@ By default, this library uses base 64 (6-bit) encoding, specifically [base64url]
 
 Using base 64, an 8 character geohash provides a lat/lon bounding box that measures **.00001 by .00002 degrees**. At the equator, where this box is largest, this is roughly equivalent to **1 by 2 meters**.
 
-In addition to the examples below, here's a [toy client](http://www.dronfelipe.com/geohash) that uses the API to display geohash bounding boxes and their neighbors.
-
 ## Installation
 ```sh
 pip install py-geohash-any
