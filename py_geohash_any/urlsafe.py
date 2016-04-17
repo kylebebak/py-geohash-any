@@ -22,7 +22,7 @@ SIGN_CHARACTER = '$'
 def to_urlsafe(n):
     """Converts integer to url-safe string."""
     if n < 0:
-        return SIGN_CHARACTER + num_encode(-n)
+        return SIGN_CHARACTER + to_urlsafe(-n)
     s = []
     while True:
         n, r = divmod(n, BASE)
@@ -34,7 +34,7 @@ def to_urlsafe(n):
 def from_urlsafe(s):
     """Converts base url-safe string to integer."""
     if s[0] == SIGN_CHARACTER:
-        return -num_decode(s[1:])
+        return -from_urlsafe(s[1:])
     n = 0
     for c in s:
         n = n * BASE + ALPHABET_REVERSE[c]
